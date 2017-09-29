@@ -201,7 +201,7 @@ input:-webkit-autofill:focus {
     position: fixed;
     top: 0;
   }
-  .mastfoot {
+  .fixed-bottom {
     position: sticky;
     bottom: 0;
   }
@@ -227,11 +227,10 @@ input:-webkit-autofill:focus {
 }
 
 .explain {
-  padding-bottom: 5rem;
-  background: url("images/recipebook.jpg") no-repeat;
+  margin: 5px;
+  padding: 5px;
   background-position: center;
 }
-
 
 
 /*@media (min-width: 992px) {

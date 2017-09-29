@@ -35,7 +35,7 @@ body {
   line-height: 1.6;
   height: 100%;
   background: #000 url("../images/cover.jpg") no-repeat;
-  background-position: center 0;
+  background-position: center fixed;
 }
 body {
   color: #fff;
@@ -48,11 +48,11 @@ body::after {
     content: "";
     height: 100%;
     left: 0;
-    opacity: 0.2;
+    opacity: 0.3;
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: -1;
+    z-index: 700;
 }
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
@@ -167,6 +167,7 @@ body::after {
     bottom: 0;
     text-align: right;
   }
+  
   /* Start the vertical centering */
   .site-wrapper-inner {
     vertical-align: middle;
@@ -196,4 +197,12 @@ body::after {
     left: 0;
     z-index: 1030;
     width: 100%;
+  }
+
+  .white{
+    margin: 30px;
+    background-color: rgba(0, 0, 0, .4);
+    padding: 10px;
+    color: #fff;
+    z-index: 10000;
   }
