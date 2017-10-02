@@ -56,7 +56,7 @@ router.post('/', function (req, res) {
     });
 });
 
-//edit a reipe in the app
+//edit a recipe in the app
 router.put('/:recipesid', function (req, res) {
     for (var i = 0; i < global.recipes.length; i++) {
         if (global.recipes[i].id === parseInt(req.params.recipesid, 10)) {
@@ -122,4 +122,4 @@ router.get('/:sorted', function (req, res) {
     });
 });
 
-exports.default = router;
+export default router;
