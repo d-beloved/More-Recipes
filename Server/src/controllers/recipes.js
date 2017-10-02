@@ -2,6 +2,8 @@ import express from 'express';
 
 const router = express.Router();
 
+
+// dummy data to simulate the database
 global.recipes = [
   {
     id: 1,
@@ -35,25 +37,37 @@ router.get('/', (req, res) => res.json({
   error: false,
 }));
 
+// get one recipes in the app
+router.get('/:recipesid', (req, res) => {
+  for (let i = 0; i < global.recipes.length; i += 1) {
+    if (global.recipes[i].id === parseInt(req.params.recipesid, 10)) {
+      res.json({
+        recipes: global.recipes[i],
+        error: false,
+      });
+    }
+  }
+});
+
+
 // Add a recipe to the app
 router.post('/', (req, res) => {
   if (!req.body.name) {
-    return res.json({
+    return res.status(400).json({
       message: 'Recipe name is missing, please enter the name of your recipe',
       error: true,
     });
   }
   global.recipes.push(req.body);
-  return res.json({
+  return res.status(200).json({
     message: 'Your recipe was entered successfully',
     error: false,
   });
 });
 
-
 // edit a recipe in the app
 router.put('/:recipesid', (req, res) => {
-  for (let i = 0; i < global.recipes.length; i++) {
+  for (let i = 0; i < global.recipes.length; i += 1) {
     if (global.recipes[i].id === parseInt(req.params.recipesid, 10)) {
       global.recipes[i].name = req.body.name;
       global.recipes[i].ingredients = req.body.ingredients;
@@ -72,50 +86,50 @@ router.put('/:recipesid', (req, res) => {
 });
 
 
-//delete a recipe entry from the app
+// delete a recipe entry from the app
 router.delete('/:recipesid', (req, res) => {
-    for (let i = 0; i < global.recipes.length; i++) {
-    if(global.recipes[i].id === parseInt(req.params.recipesid, 10)){
-        global.recipes.splice(i,1);
-        return res.json({
-            message: "You have deleted this recipe successfully",
-            error: false
-        });
+  for (let i = 0; i < global.recipes.length; i += 1) {
+    if (global.recipes[i].id === parseInt(req.params.recipesid, 10)) {
+      global.recipes.splice(i, 1);
+      return res.json({
+        message: 'You have deleted this recipe successfully',
+        error: false,
+      });
     }
+  }
+  return res.status(404).json({
+    message: 'Recipe not found',
+    error: true,
+  });
+});
+
+
+// Add a review for a particular recipe
+router.post('/:recipesid/reviews', (req, res) => {
+  for (let i = 0; i < global.recipes.length; i += 1) {
+    if (global.recipes[i].id === parseInt(req.params.recipesid, 10)) {
+      global.recipes[i].reviews = req.body.reviews;
+      return res.json({
+        message: 'Your review was posted successfully',
+        error: false,
+      });
     }
-    return res.status(404).json({
-    message: "Recipe not found",
-    error: true
-    });
-    });
+  }
+  return res.status(404).json({
+    message: 'Recipe not found',
+    error: true,
+  });
+});
 
 
-    //Add a review for a particular recipe
-    router.post('/:recipesid/reviews', (req, res) => {
-    for(let i=0; i < global.recipes.length; i++){
-    if(global.recipes[i].id === parseInt(req.params.recipesid, 10)){
-        global.recipes[i].reviews = req.body.reviews;
-        return res.json({
-            message: "Your review was posted successfully",
-            error: false
-        });
-    }
-    }
-    return res.status(404).json({
-    message: "Recipe not found",
-    error: true
-    });
-    });
+// Get all the recipes arranged in the order of their upvotes
+let sorted = [];
+router.get('/:sorted', (req, res) => {
+  sorted = global.recipes.sort((a, b) => b.upvotes - a.upvotes);
+  return res.json({
+    recipes: sorted,
+    error: false,
+  });
+});
 
-
-    //Get all the recipes arranged in the order of their upvotes
-    let sorted = [];
-    router.get('/:sorted', (req, res) => {
-    sorted = global.recipes.sort((a, b) => b.upvotes - a.upvotes);
-                 return res.json({
-                 recipes: sorted,
-                 error: false
-    });
-    });
-
-    export default router;
+export default router;

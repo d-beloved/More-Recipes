@@ -19,10 +19,6 @@ var _controllers2 = _interopRequireDefault(_controllers);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Set up the express app
-/*import express from 'express';
-import logger from 'morgan';
-import bodyParser from 'body-parser';*/
-
 var app = (0, _express2.default)();
 
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
@@ -35,5 +31,5 @@ app.use('/api/v1/', _controllers2.default);
 
 // Setup a default catch-all route that sends back a welcome message in JSON format.
 app.listen('8000', function () {
-  console.log("The More-Recipe App Server is running");
+  console.log('The More-Recipe App Server is running');
 });
