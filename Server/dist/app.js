@@ -33,3 +33,5 @@ app.use('/api/v1/', _controllers2.default);
 app.listen('8000', function () {
   console.log('The More-Recipe App Server is running');
 });
+
+module.exports = app;
