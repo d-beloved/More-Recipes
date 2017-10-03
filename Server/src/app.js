@@ -1,6 +1,3 @@
-/*import express from 'express';
-import logger from 'morgan';
-import bodyParser from 'body-parser';*/
 
 import express from 'express';
 import logger from 'morgan';
@@ -19,8 +16,7 @@ app.use(logger('dev'));
 app.use('/api/v1/', router);
 
 
-
 // Setup a default catch-all route that sends back a welcome message in JSON format.
 app.listen('8000', () => {
-  console.log("The More-Recipe App Server is running");
+  console.log('The More-Recipe App Server is running');
 });
