@@ -1,5 +1,5 @@
 
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const Favorites = sequelize.define('Favorites', {
     userId: {
       type: DataTypes.INTEGER,

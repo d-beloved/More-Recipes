@@ -1,5 +1,5 @@
 
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const Recipes = sequelize.define('Recipes', {
     name: {
       type: DataTypes.STRING,

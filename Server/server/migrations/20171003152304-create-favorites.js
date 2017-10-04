@@ -1,5 +1,5 @@
 
-module.exports = {
+exports defaults = {
   up: (queryInterface, Sequelize) =>
     queryInterface.createTable('Favorites', {
       id: {

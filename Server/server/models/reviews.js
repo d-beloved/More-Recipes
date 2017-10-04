@@ -1,5 +1,5 @@
 
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const reviews = sequelize.define('reviews', {
     content: {
       type: DataTypes.TEXT,

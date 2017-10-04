@@ -1,5 +1,5 @@
 
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const votes = sequelize.define('votes', {
     upvotes: {
       type: DataTypes.INTEGER,
