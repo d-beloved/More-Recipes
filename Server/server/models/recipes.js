@@ -9,9 +9,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    prepMethod: {
+    procedure: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    image: {
+      type: DataTypes.STRING,
     },
   });
 
