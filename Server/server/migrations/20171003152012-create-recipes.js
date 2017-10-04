@@ -1,7 +1,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) =>
-    return queryInterface.createTable('Recipes', {
+    queryInterface.createTable('Recipes', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -41,6 +41,6 @@ module.exports = {
           as: 'userId',
         },
       },
-    });
+    }),
   down: (queryInterface /* , Sequelize */) => queryInterface.dropTable('Recipes'),
 };

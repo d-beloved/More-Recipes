@@ -50,6 +50,6 @@ module.exports = {
           as: 'recipeId',
         },
       },
-    });
+    }),
   down: (queryInterface /*, Sequelize */) => queryInterface.dropTable('votes'),
 };
