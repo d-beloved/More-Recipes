@@ -1,9 +1,13 @@
 
 module.exports = (sequelize, DataTypes) => {
   const votes = sequelize.define('votes', {
-    content: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
+    upvotes: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    downvotes: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
     userId: {
       type: DataTypes.INTEGER,

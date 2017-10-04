@@ -2,15 +2,15 @@
 module.exports = (sequelize, DataTypes) => {
   const reviews = sequelize.define('reviews', {
     content: {
-      types: DataTypes.TEXT,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     userId: {
-      types: DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     recipesId: {
-      types: DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   });
