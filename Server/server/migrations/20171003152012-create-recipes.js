@@ -1,5 +1,5 @@
 
-exports defaults = {
+module.exports = {
   up: (queryInterface, Sequelize) =>
     queryInterface.createTable('Recipes', {
       id: {
