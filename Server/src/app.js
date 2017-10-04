@@ -20,3 +20,5 @@ app.use('/api/v1/', router);
 app.listen('8000', () => {
   console.log('The More-Recipe App Server is running');
 });
+
+// This will be our application entry. We'll setup our server here.
