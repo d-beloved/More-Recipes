@@ -1,5 +1,6 @@
  // The code segment below Imports all dependencies
  import dotenv from 'dotenv';
+ import bcrypt from 'bcrypt-nodejs';
  import jwt from 'jsonwebtoken';
  import _ from 'lodash';
  import validator from 'validator';
@@ -22,11 +23,7 @@
     //  const validator = new Validator(body, Users.createRules());
     console.log("body => ",req.body);
      if (validator.isEmail(body.email) && validator.isLowercase(body.password) && body.username) {
-       // compares the pasword and if they don't match, it returns an error message
-       if (body.confirmPassword !== body.password) {
-         return res.status(401).json({ message: 'Password does not match' });
-       }
-       // Checks if the inputed email and username exists in the database
+       // Checks if the inputed email exists in the database
        Users.findOne({
          where: {
              email: body.email
@@ -36,7 +33,12 @@
            if (users) {
              return res.status(404).send({ message: 'Someone beat you to it, the credential exists!' });
            }
-           //Once all parameters check out, it gives a successful message and assigns a token to the user
+           /*Once all parameters check out, 
+           | it hashes the password
+           | gives a successful message 
+           | and assigns a token to the user
+           */
+          const hash = bcrypt.hashSync('body.password');
            Users.create(body)
              .then((savedUser) => {
                const data = _.pick(savedUser, ['id', 'username']);
@@ -58,9 +60,12 @@
     * @param {*res} res 
     */
    login(req, res) {
-     const body = req.body;
-     const validator = new Validator(body, User.loginRules());
-     if (validator.fails()) {
+    const body = req.body;
+    //const validator = new Validator(body, User.loginRules());
+    if (validator.isLowercase(body.password) && body.username) {
+    // bcrypt.compareSync("bacon", hash); // true
+    // bcrypt.compareSync("veggies", hash); // false
+    if (validator.fails()) {
        return res.status(400).json({ message: validator.errors.all() });
      }
      Users.findOne({
@@ -72,7 +77,7 @@
          if (!users) {
            return Promise.reject({ code: 404, message: 'User not found, please register' });
          }
-         if (!users.comparePassword(user, body.password)) {
+         if (!bcrypt.compareSync('body.password', hash)) {
            return res.status(400).send({ message: 'Password does not match the one in the record' });
          }
          //once the login details checkout, it assigns the user a token in order to access other functionalities
@@ -81,7 +86,8 @@
          return res.status(201).send({ message: 'You are Logged in successfully', token: myToken, });
        })
        .catch(error => res.status(503).send({ error }));
-   }
+   };
+  }
  };
  
  export default userController;
