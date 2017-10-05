@@ -13,10 +13,6 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    confirmPassword: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
   });
 
   Users.associate = (models) => {

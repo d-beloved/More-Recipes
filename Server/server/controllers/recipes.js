@@ -1,4 +1,4 @@
-import db from '../models';
+/*import db from '../models';
 import validator from 'validator';
 
 const sequelize = db.sequelize;
@@ -274,3 +274,4 @@ const recipeController = {
 };
 
 export default recipeController;
+*/

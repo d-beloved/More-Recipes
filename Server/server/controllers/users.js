@@ -19,37 +19,56 @@
     * @returns {*obj} obj 
     */
    create(req, res) {
-     const body = req.body;
+    const body = req.body;
     //  const validator = new Validator(body, Users.createRules());
     console.log("body => ",req.body);
-     if (validator.isEmail(body.email) && validator.isLowercase(body.password) && body.username) {
+
+     if (body.email &&
+        body.password &&
+        body.username &&
+       validator.isEmail(body.email) &&
+       validator.isLowercase(body.password) && body.username) {
        // Checks if the inputed email exists in the database
-       Users.findOne({
+       return Users.findOne({
          where: {
-             email: body.email
-            }
-         })
-         .then((users) => {
-           if (users) {
-             return res.status(404).send({ message: 'Someone beat you to it, the credential exists!' });
-           }
-           /*Once all parameters check out, 
-           | it hashes the password
-           | gives a successful message 
-           | and assigns a token to the user
-           */
-          const hash = bcrypt.hashSync('body.password');
+           email: body.email
+         }
+       })
+       .then((foundUser) => {
+         if(!foundUser) {
            Users.create(body)
-             .then((savedUser) => {
-               const data = _.pick(savedUser, ['id', 'username']);
-               const myToken = jwt.sign(data, secret, { expiresIn: 86400 });// the token expires after 24 hours
-               return res.status(201).send({ message: 'Registration Successful', user: data, token: myToken });
-             })
-             .catch(error => res.status(500).send(error));
-         })
-         .catch((error) => {
-           return res.status(500).send('An error occured while trying to create a user ', error.message);
-         });
+           .then((newUser) => {
+            return res.status(403).send(foundUser);
+           })
+         }
+         return res.status(200).send({ message: "User already exist"});
+       });
+      //  Users.findOne({
+      //    where: {
+      //        email: body.email
+      //       }
+      //    })
+      //    .then((users) => {
+      //      if (users) {
+      //        return res.status(404).send({ message: 'Someone beat you to it, the credential exists!' });
+      //      }
+      //      /*Once all parameters check out, 
+      //      | it hashes the password
+      //      | gives a successful message 
+      //      | and assigns a token to the user
+      //      */
+      //     const hash = bcrypt.hashSync('body.password');
+      //      Users.create(body)
+      //        .then((savedUser) => {
+      //          const data = _.pick(savedUser, ['id', 'username']);
+      //          const myToken = jwt.sign(data, secret, { expiresIn: 86400 });// the token expires after 24 hours
+      //          return res.status(201).send({ message: 'Registration Successful', user: data, token: myToken });
+      //        })
+      //        .catch(error => res.status(500).send(error));
+      //    })
+      //    .catch((error) => {
+      //      return res.status(500).send('An error occured while trying to create a user ', error.message);
+      //    });
      } else {
        return res.status(401).json({ message: validator.errors.all() });
      }
