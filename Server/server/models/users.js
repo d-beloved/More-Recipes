@@ -13,6 +13,10 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    confirmPassword: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   });
 
   Users.associate = (models) => {
@@ -24,7 +28,7 @@ export default (sequelize, DataTypes) => {
       foreignKey: 'userId',
       as: 'reviews',
     });
-    Users.hasMany(models.Favorite, {
+    Users.hasMany(models.Favorites, {
       foreignKey: 'userId',
       as: 'favorite',
     });
