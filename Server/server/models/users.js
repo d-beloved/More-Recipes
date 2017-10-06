@@ -24,7 +24,7 @@ export default (sequelize, DataTypes) => {
       foreignKey: 'userId',
       as: 'reviews',
     });
-    Users.hasMany(models.Favorite, {
+    Users.hasMany(models.Favorites, {
       foreignKey: 'userId',
       as: 'favorite',
     });
