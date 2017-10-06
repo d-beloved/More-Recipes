@@ -34,7 +34,6 @@ body {
   color: #5b5b5b;
   line-height: 1.6;
   height: 100%;
-  background: #000 url("../images/cover.jpg") no-repeat;
   background-position: center fixed;
 }
 body {
@@ -139,7 +138,7 @@ body::after {
 .inner h1 {
   font-size: 46px;
   font-weight: 700;
-  color: white;
+  color: #FFFFFF;
 }
 
 /*
@@ -205,3 +204,21 @@ body::after {
     color: #fff;
     z-index: 1000;
   }
+  /*.fixed-bottom .inner {
+    position: sticky;
+    bottom: 0;
+  }*/
+
+  #carouselControls .carousel-caption {
+    color: black;
+    right: 40%;
+    text-align: center;
+    max-width: 500px;
+    left: auto;
+    text size: 200px;
+    /*top: auto;*/
+  /*position: relative;*/
+  top: 50%;
+  transform: translateY(-50%);
+  bottom: initial;
+}
