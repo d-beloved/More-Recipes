@@ -1,0 +1,35 @@
+{
+  "name": "Server",
+  "version": "1.0.0",
+  "description": "More-Recipes provides a platform for users to share the awesome and exciting recipe ideas they\r have invented or learnt. Suppose a user comes up with a recipe, he/she can post it on\r More-Recipes and get feedback in form of reviews and votes from other users who explore that\r recipe. Users can also keep a list of their favorite recipes on the application.",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "express": "^4.15.5",
+    "mocha": "^3.5.3",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.12.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "eslint": "^4.8.0",
+    "eslint-config-airbnb-base": "^12.0.1",
+    "eslint-plugin-import": "^2.7.0"
+  },
+  "scripts": {
+    "test": "mocha --compilers js:babel-core/register tests/test.js",
+    "build": "babel ./src -d ./dist",
+    "start": "nodemon ./dist/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
